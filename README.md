@@ -13,17 +13,27 @@ A lightweight MCP (Model Context Protocol) server for task management with intel
 ## Installation
 
 ```bash
-npm install task-manager-mcp
-# or
-npx task-manager-mcp
+git clone https://github.com/localSummer/task-manager-mcp.git
 ```
 
-## Configuration
+## MCP Client Configuration
 
-Set the task configuration file path via environment variable:
+### Cursor IDE Configuration
 
-```bash
-export TASK_CONFIG_PATH="/path/to/your/tasks.json"
+Add the following configuration to your `.cursor/mcp.json` file:
+
+```json
+{
+  "mcpServers": {
+    "task-manager": {
+      "command": "node",
+      "args": ["/absolute/task-manager-mcp/src/index.mjs"],
+      "env": {
+        "TASK_CONFIG_PATH": "/absolute/path/to/your/tasks.json"
+      }
+    }
+  }
+}
 ```
 
 ## Task Configuration Format
@@ -49,7 +59,8 @@ Your task configuration file should follow this structure:
       "details": "", // Additional task details (string, optional)
       "result": "", // Expected result of the task (string, optional)
       "testStrategy": "", // Strategy for testing this task (string, optional)
-      "subtasks": [ // Array of subtasks (array, optional)
+      "subtasks": [
+        // Array of subtasks (array, optional)
         {
           "number": 1.1, // Subtask number (float) - Unique identifier for the subtask
           "key": "create-folders", // Subtask key (string) - Unique identifier for the subtask
@@ -90,39 +101,28 @@ Find the next executable task based on priorities and preconditions.
 
 Returns the highest priority task that has all dependencies satisfied.
 
-## MCP Client Configuration
+## Related Projects
 
-### Cursor IDE Configuration
+This project draws inspiration from [claude-task-master](https://github.com/eyaltoledano/claude-task-master) by @eyaltoledano, a comprehensive AI-powered task management system for development with Claude.
 
-Add the following configuration to your `.cursor/mcp.json` file:
+### Key Differences
 
-```json
-{
-  "mcpServers": {
-    "task-manager": {
-      "command": "node",
-      "args": ["/absolute/task-manager-mcp/src/index.mjs"],
-      "env": {
-        "TASK_CONFIG_PATH": "/absolute/path/to/your/tasks.json"
-      }
-    }
-  }
-}
-```
+While both projects focus on task management for AI-driven development, this `task-manager-mcp` project has a different scope:
 
-## Usage
+| Feature             | claude-task-master                                                                    | task-manager-mcp                                                     |
+| ------------------- | ------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| **Architecture**    | Full-featured CLI tool with AI integration                                            | Lightweight MCP server focused on protocol compliance                |
+| **Scope**           | Complete task management ecosystem with PRD parsing, AI research, and code generation | Core task status tracking and dependency resolution                  |
+| **AI Integration**  | Built-in support for multiple AI providers (Claude, OpenAI, Gemini, etc.)             | Protocol-agnostic, works with any MCP-compatible AI client           |
+| **Dependencies**    | Rich feature set with external API dependencies                                       | Standalone with minimal dependencies                                 |
+| **Target Use Case** | End-to-end project management and AI-assisted development                             | Simple task tracking service for integration into existing workflows |
 
-```bash
-# Start the MCP server
-export TASK_CONFIG_PATH="/path/to/tasks.json"
-npx task-manager-mcp
+### When to Choose Which
 
-# Development mode
-npm run dev
+- **Choose claude-task-master** if you want a complete AI-powered development workflow with PRD parsing, research capabilities, and direct AI integration
+- **Choose task-manager-mcp** if you need a lightweight, protocol-compliant task management service that integrates with your existing MCP setup
 
-# Debug with inspector
-npm run inspector
-```
+Both projects complement each other in the ecosystem of AI-assisted development tools.
 
 ## License
 
