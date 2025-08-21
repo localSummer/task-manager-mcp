@@ -14,24 +14,33 @@
       "status": "pending",
       "precondition": [],
       "priority": "high",
+      "details": "",
+      "result": "",
+      "testStrategy": "",
       "subtasks": [
         {
           "number": 1.1,
           "key": "create-folders",
           "title": "Create Folder Structure",
           "description": "Set up the basic directory structure",
+          "details": "",
           "status": "pending",
           "precondition": [],
-          "priority": "high"
+          "priority": "high",
+          "result": "",
+          "testStrategy": ""
         },
         {
           "number": 1.2,
           "key": "init-config",
           "title": "Initialize Configuration",
           "description": "Create configuration files",
+          "details": "",
           "status": "pending",
           "precondition": ["create-folders"],
-          "priority": "medium"
+          "priority": "medium",
+          "result": "",
+          "testStrategy": ""
         }
       ]
     },
@@ -43,6 +52,9 @@
       "status": "pending",
       "precondition": ["setup-project"],
       "priority": "high",
+      "details": "",
+      "result": "",
+      "testStrategy": "",
       "subtasks": []
     },
     {
@@ -53,6 +65,9 @@
       "status": "pending",
       "precondition": ["implement-features"],
       "priority": "medium",
+      "details": "",
+      "result": "",
+      "testStrategy": "",
       "subtasks": []
     }
   ]
