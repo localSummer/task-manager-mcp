@@ -1,0 +1,31 @@
+{
+  "name": "task-manager-mcp",
+  "version": "1.0.0",
+  "description": "A lightweight MCP server for task management with status tracking and next task discovery",
+  "main": "src/index.mjs",
+  "type": "module",
+  "bin": {
+    "task-manager-mcp": "src/index.mjs"
+  },
+  "scripts": {
+    "start": "node src/index.mjs",
+    "dev": "fastmcp dev src/index.mjs",
+    "inspector": "npx @modelcontextprotocol/inspector src/index.mjs"
+  },
+  "keywords": [
+    "mcp",
+    "task",
+    "management",
+    "status",
+    "workflow"
+  ],
+  "author": "wangxingwen",
+  "license": "ISC",
+  "dependencies": {
+    "fastmcp": "1.27.6",
+    "zod": "^3.22.4"
+  },
+  "engines": {
+    "node": ">=16"
+  }
+}

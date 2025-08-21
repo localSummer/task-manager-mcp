@@ -1,0 +1,59 @@
+{
+  "meta": {
+    "taskName": "Task Manager",
+    "description": "Example task management configuration",
+    "version": "1.0.0",
+    "tasksIncluded": 3
+  },
+  "tasks": [
+    {
+      "number": 1,
+      "key": "setup-project",
+      "title": "Project Setup",
+      "description": "Initialize project structure and basic configuration",
+      "status": "pending",
+      "precondition": [],
+      "priority": "high",
+      "subtasks": [
+        {
+          "number": 1.1,
+          "key": "create-folders",
+          "title": "Create Folder Structure",
+          "description": "Set up the basic directory structure",
+          "status": "pending",
+          "precondition": [],
+          "priority": "high"
+        },
+        {
+          "number": 1.2,
+          "key": "init-config",
+          "title": "Initialize Configuration",
+          "description": "Create configuration files",
+          "status": "pending",
+          "precondition": ["create-folders"],
+          "priority": "medium"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "key": "implement-features",
+      "title": "Feature Implementation",
+      "description": "Implement core application features",
+      "status": "pending",
+      "precondition": ["setup-project"],
+      "priority": "high",
+      "subtasks": []
+    },
+    {
+      "number": 3,
+      "key": "testing-qa",
+      "title": "Testing and QA",
+      "description": "Run tests and quality assurance checks",
+      "status": "pending",
+      "precondition": ["implement-features"],
+      "priority": "medium",
+      "subtasks": []
+    }
+  ]
+}
