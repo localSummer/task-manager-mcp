@@ -1,7 +1,7 @@
 {
   "meta": {
-    "taskName": "Task Manager",
-    "description": "Example task management configuration",
+    "projectName": "My Project",
+    "description": "Example Project task management configuration",
     "version": "1.0.0",
     "tasksIncluded": 3
   },

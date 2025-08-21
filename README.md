@@ -63,16 +63,39 @@ Your task configuration file should follow this structure:
 ## Available Tools
 
 ### set_task_status
+
 Update the status of one or more tasks or subtasks.
 
 Parameters:
+
 - `identifier`: Task key or number (supports comma-separated multiple values)
 - `status`: New status (pending|done|in-progress|review|deferred|cancelled)
 
 ### next_task
+
 Find the next executable task based on priorities and preconditions.
 
 Returns the highest priority task that has all dependencies satisfied.
+
+## MCP Client Configuration
+
+### Cursor IDE Configuration
+
+Add the following configuration to your `.cursor/mcp.json` file:
+
+```json
+{
+  "mcpServers": {
+    "task-manager": {
+      "command": "node",
+      "args": ["/absolute/task-manager-mcp/src/index.mjs"],
+      "env": {
+        "TASK_CONFIG_PATH": "/absolute/path/to/your/tasks.json"
+      }
+    }
+  }
+}
+```
 
 ## Usage
 
