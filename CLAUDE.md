@@ -56,13 +56,27 @@ Tasks are defined in JSON with this hierarchy:
 ### File Organization
 
 - Entry point: `src/index.mjs` (executable with shebang)
+- Server class: `src/server.mjs` (FastMCP server wrapper with lifecycle management)  
 - Tools registration: `src/tools/index.mjs` aggregates all tool definitions
 - Each tool has both definition (`src/tools/`) and implementation (`src/services/`)
+- Configuration management: `src/config.mjs` handles JSON file operations and validation
 - Shared utilities in respective `utils.mjs` files
+
+### Task Status Values
+
+Valid status values for both tasks and subtasks:
+- `pending`: Initial state, ready to be started
+- `done`: Completed successfully  
+- `in-progress`: Currently being worked on
+- `review`: Completed but needs review
+- `deferred`: Postponed to later
+- `cancelled`: No longer needed
 
 ### Development Notes
 
-- Uses ES modules (`.mjs` extensions)
+- Uses ES modules (`.mjs` extensions) throughout
 - Chinese comments in config.mjs for internationalization
-- MCP protocol requires silent error handling (no console output)
+- MCP protocol requires silent error handling (no console output to preserve JSON-RPC)
 - Task identifiers support both key strings and numeric IDs
+- Graceful shutdown handlers for SIGINT/SIGTERM in index.mjs
+- Node.js minimum version: 16 (specified in package.json)
