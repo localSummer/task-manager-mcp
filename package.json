@@ -24,7 +24,7 @@
   "author": "wangxingwen",
   "license": "ISC",
   "dependencies": {
-    "fastmcp": "1.27.6",
+    "fastmcp": "3.15.0",
     "zod": "^3.22.4"
   },
   "engines": {

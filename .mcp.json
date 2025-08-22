@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "task-manager-mcp": {
+      "command": "node",
+      "args": ["/Users/wangxingwen/fe/cnpm/mcp/task-manager-mcp/src/index.mjs"],
+      "env": {
+        "TASK_CONFIG_PATH": "/Users/wangxingwen/fe/cnpm/mcp/task-manager-mcp/example-tasks.json"
+      }
+    }
+  }
+}

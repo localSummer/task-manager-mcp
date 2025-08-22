@@ -45,7 +45,7 @@ This is a Model Context Protocol (MCP) server built with the FastMCP framework f
 
 Tasks are defined in JSON with this hierarchy:
 
-- `meta`: Project metadata
+- `meta`: Project metadata (including `tasksResultOutputDir` for task result file storage)
 - `tasks[]`: Top-level tasks with status, preconditions, priority
 - `subtasks[]`: Nested tasks within parent tasks
 

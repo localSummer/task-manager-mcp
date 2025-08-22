@@ -3,6 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 import { registerAllTools } from './tools/index.mjs';
+import { registerAllPrompts } from './prompts/index.mjs';
 import { validateConfigFile, getTaskConfigPath } from './config.mjs';
 
 // Constants
@@ -37,6 +38,9 @@ class TaskManagerMCPServer {
 
       // Register all tools
       registerAllTools(this.server);
+
+      // Register all prompts
+      registerAllPrompts(this.server);
 
       await this.server.start({
         transportType: 'stdio',

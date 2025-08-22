@@ -3,7 +3,8 @@
     "projectName": "My Project",
     "description": "Example Project task management configuration",
     "version": "1.0.0",
-    "tasksIncluded": 3
+    "tasksIncluded": 3,
+    "tasksResultOutputDir": "src/task-results"
   },
   "tasks": [
     {

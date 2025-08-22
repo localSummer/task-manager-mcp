@@ -86,6 +86,24 @@ export function saveTaskConfig(config) {
 }
 
 /**
+ * 获取任务结果输出目录
+ * @returns {string} 任务结果输出目录路径
+ * @throws {Error} 如果配置中未设置 tasksResultOutputDir
+ */
+export function getTasksResultOutputDir() {
+  const config = loadTaskConfig();
+  const outputDir = config.meta?.tasksResultOutputDir;
+
+  if (!outputDir) {
+    throw new Error(
+      'tasksResultOutputDir is not configured in the task configuration file. Please add it to the meta section.'
+    );
+  }
+
+  return outputDir;
+}
+
+/**
  * 获取配置和路径的组合信息
  * @returns {Object} 包含配置对象和路径的信息
  */
@@ -99,6 +117,7 @@ export function getConfigInfo() {
     meta: config.meta || {},
     tasks: config.tasks || [],
     tasksCount: config.tasks ? config.tasks.length : 0,
+    tasksResultOutputDir: config.meta?.tasksResultOutputDir,
   };
 }
 
@@ -108,4 +127,5 @@ export default {
   loadTaskConfig,
   saveTaskConfig,
   getConfigInfo,
+  getTasksResultOutputDir,
 };
