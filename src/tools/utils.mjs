@@ -50,7 +50,7 @@ export function handleApiResult(result, log, errorPrefix = 'API error') {
       typeof result.error === 'object'
         ? result.error.message
         : result.error || `Unknown ${errorPrefix}`;
-    
+
     log.error(`${errorPrefix}: ${errorMsg}`);
     return createErrorResponse(errorMsg);
   }

@@ -233,7 +233,7 @@ export const setTaskStatusService = async (identifier, status, log) => {
 
   try {
     const taskConfig = loadTaskConfig();
-    
+
     if (!taskConfig || !taskConfig.tasks) {
       return {
         status: 'error',

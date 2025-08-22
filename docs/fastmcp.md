@@ -11,11 +11,11 @@ FastMCP uses the [Standard Schema](https://standardschema.dev) specification for
 **Zod Example:**
 
 ```typescript
-import { z } from "zod";
+import { z } from 'zod';
 
 server.addTool({
-  name: "fetch-zod",
-  description: "Fetch the content of a url (using Zod)",
+  name: 'fetch-zod',
+  description: 'Fetch the content of a url (using Zod)',
   parameters: z.object({
     url: z.string(),
   }),
@@ -28,13 +28,13 @@ server.addTool({
 **ArkType Example:**
 
 ```typescript
-import { type } from "arktype";
+import { type } from 'arktype';
 
 server.addTool({
-  name: "fetch-arktype",
-  description: "Fetch the content of a url (using ArkType)",
+  name: 'fetch-arktype',
+  description: 'Fetch the content of a url (using ArkType)',
   parameters: type({
-    url: "string",
+    url: 'string',
   }),
   execute: async (args) => {
     return await fetchWebpageContent(args.url);
@@ -47,11 +47,11 @@ server.addTool({
 Valibot requires the peer dependency @valibot/to-json-schema.
 
 ```typescript
-import * as v from "valibot";
+import * as v from 'valibot';
 
 server.addTool({
-  name: "fetch-valibot",
-  description: "Fetch the content of a url (using Valibot)",
+  name: 'fetch-valibot',
+  description: 'Fetch the content of a url (using Valibot)',
   parameters: v.object({
     url: v.string(),
   }),
@@ -69,11 +69,11 @@ When creating tools that don't require parameters, you have two options:
 
    ```typescript
    server.addTool({
-     name: "sayHello",
-     description: "Say hello",
+     name: 'sayHello',
+     description: 'Say hello',
      // No parameters property
      execute: async () => {
-       return "Hello, world!";
+       return 'Hello, world!';
      },
    });
    ```
@@ -81,14 +81,14 @@ When creating tools that don't require parameters, you have two options:
 2. Explicitly define empty parameters:
 
    ```typescript
-   import { z } from "zod";
+   import { z } from 'zod';
 
    server.addTool({
-     name: "sayHello",
-     description: "Say hello",
+     name: 'sayHello',
+     description: 'Say hello',
      parameters: z.object({}), // Empty object
      execute: async () => {
-       return "Hello, world!";
+       return 'Hello, world!';
      },
    });
    ```
@@ -103,10 +103,10 @@ You can control which tools are available to authenticated users by adding an op
 
 ```typescript
 server.addTool({
-  name: "admin-tool",
-  description: "An admin-only tool",
-  canAccess: (auth) => auth?.role === "admin",
-  execute: async () => "Welcome, admin!",
+  name: 'admin-tool',
+  description: 'An admin-only tool',
+  canAccess: (auth) => auth?.role === 'admin',
+  execute: async () => 'Welcome, admin!',
 });
 ```
 
@@ -116,13 +116,13 @@ server.addTool({
 
 ```js
 server.addTool({
-  name: "download",
-  description: "Download a file",
+  name: 'download',
+  description: 'Download a file',
   parameters: z.object({
     url: z.string(),
   }),
   execute: async (args) => {
-    return "Hello, world!";
+    return 'Hello, world!';
   },
 });
 ```
@@ -131,8 +131,8 @@ The latter is equivalent to:
 
 ```js
 server.addTool({
-  name: "download",
-  description: "Download a file",
+  name: 'download',
+  description: 'Download a file',
   parameters: z.object({
     url: z.string(),
   }),
@@ -140,8 +140,8 @@ server.addTool({
     return {
       content: [
         {
-          type: "text",
-          text: "Hello, world!",
+          type: 'text',
+          text: 'Hello, world!',
         },
       ],
     };
@@ -155,16 +155,16 @@ If you want to return a list of messages, you can return an object with a `conte
 
 ```js
 server.addTool({
-  name: "download",
-  description: "Download a file",
+  name: 'download',
+  description: 'Download a file',
   parameters: z.object({
     url: z.string(),
   }),
   execute: async (args) => {
     return {
       content: [
-        { type: "text", text: "First message" },
-        { type: "text", text: "Second message" },
+        { type: 'text', text: 'First message' },
+        { type: 'text', text: 'Second message' },
       ],
     };
   },
@@ -176,17 +176,17 @@ server.addTool({
 Use the `imageContent` to create a content object for an image:
 
 ```js
-import { imageContent } from "fastmcp";
+import { imageContent } from 'fastmcp';
 
 server.addTool({
-  name: "download",
-  description: "Download a file",
+  name: 'download',
+  description: 'Download a file',
   parameters: z.object({
     url: z.string(),
   }),
   execute: async (args) => {
     return imageContent({
-      url: "https://example.com/image.png",
+      url: 'https://example.com/image.png',
     });
 
     // or...
@@ -221,8 +221,8 @@ The above example is equivalent to:
 
 ```js
 server.addTool({
-  name: "download",
-  description: "Download a file",
+  name: 'download',
+  description: 'Download a file',
   parameters: z.object({
     url: z.string(),
   }),
@@ -230,9 +230,9 @@ server.addTool({
     return {
       content: [
         {
-          type: "image",
-          data: "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
-          mimeType: "image/png",
+          type: 'image',
+          data: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
+          mimeType: 'image/png',
         },
       ],
     };
@@ -246,15 +246,15 @@ FastMCP includes a configurable ping mechanism to maintain connection health. Th
 
 ```ts
 const server = new FastMCP({
-  name: "My Server",
-  version: "1.0.0",
+  name: 'My Server',
+  version: '1.0.0',
   ping: {
     // Explicitly enable or disable pings (defaults vary by transport)
     enabled: true,
     // Configure ping interval in milliseconds (default: 5000ms)
     intervalMs: 10000,
     // Set log level for ping-related messages (default: 'debug')
-    logLevel: "debug",
+    logLevel: 'debug',
   },
 });
 ```
@@ -276,22 +276,22 @@ Enable (or customise) the endpoint via the `health` key in the server options:
 
 ```ts
 const server = new FastMCP({
-  name: "My Server",
-  version: "1.0.0",
+  name: 'My Server',
+  version: '1.0.0',
   health: {
     // Enable / disable (default: true)
     enabled: true,
     // Body returned by the endpoint (default: 'ok')
-    message: "healthy",
+    message: 'healthy',
     // Path that should respond (default: '/health')
-    path: "/healthz",
+    path: '/healthz',
     // HTTP status code to return (default: 200)
     status: 200,
   },
 });
 
 await server.start({
-  transportType: "httpStream",
+  transportType: 'httpStream',
   httpStream: { port: 8080 },
 });
 ```
@@ -313,8 +313,8 @@ FastMCP supports [Roots](https://modelcontextprotocol.io/docs/concepts/roots) - 
 
 ```ts
 const server = new FastMCP({
-  name: "My Server",
-  version: "1.0.0",
+  name: 'My Server',
+  version: '1.0.0',
   roots: {
     // Set to false to explicitly disable roots support
     enabled: false,
@@ -333,15 +333,15 @@ This provides the following benefits:
 You can listen for root changes in your server:
 
 ```ts
-server.on("connect", (event) => {
+server.on('connect', (event) => {
   const session = event.session;
 
   // Access the current roots
-  console.log("Initial roots:", session.roots);
+  console.log('Initial roots:', session.roots);
 
   // Listen for changes to the roots
-  session.on("rootsChanged", (event) => {
-    console.log("Roots changed:", event.roots);
+  session.on('rootsChanged', (event) => {
+    console.log('Roots changed:', event.roots);
   });
 });
 ```
@@ -353,17 +353,17 @@ When a client doesn't support roots or when roots functionality is explicitly di
 Use the `audioContent` to create a content object for an audio:
 
 ```js
-import { audioContent } from "fastmcp";
+import { audioContent } from 'fastmcp';
 
 server.addTool({
-  name: "download",
-  description: "Download a file",
+  name: 'download',
+  description: 'Download a file',
   parameters: z.object({
     url: z.string(),
   }),
   execute: async (args) => {
     return audioContent({
-      url: "https://example.com/audio.mp3",
+      url: 'https://example.com/audio.mp3',
     });
 
     // or...
@@ -398,8 +398,8 @@ The above example is equivalent to:
 
 ```js
 server.addTool({
-  name: "download",
-  description: "Download a file",
+  name: 'download',
+  description: 'Download a file',
   parameters: z.object({
     url: z.string(),
   }),
@@ -407,9 +407,9 @@ server.addTool({
     return {
       content: [
         {
-          type: "audio",
-          data: "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
-          mimeType: "audio/mpeg",
+          type: 'audio',
+          data: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
+          mimeType: 'audio/mpeg',
         },
       ],
     };
@@ -423,8 +423,8 @@ You can combine various types in this way and send them back to AI
 
 ```js
 server.addTool({
-  name: "download",
-  description: "Download a file",
+  name: 'download',
+  description: 'Download a file',
   parameters: z.object({
     url: z.string(),
   }),
@@ -432,18 +432,18 @@ server.addTool({
     return {
       content: [
         {
-          type: "text",
-          text: "Hello, world!",
+          type: 'text',
+          text: 'Hello, world!',
         },
         {
-          type: "image",
-          data: "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
-          mimeType: "image/png",
+          type: 'image',
+          data: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
+          mimeType: 'image/png',
         },
         {
-          type: "audio",
-          data: "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=",
-          mimeType: "audio/mpeg",
+          type: 'audio',
+          data: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
+          mimeType: 'audio/mpeg',
         },
       ],
     };
@@ -476,33 +476,33 @@ server.addTool({
 FastMCP allows you to provide a custom logger implementation to control how the server logs messages. This is useful for integrating with existing logging infrastructure or customizing log formatting.
 
 ```ts
-import { FastMCP, Logger } from "fastmcp";
+import { FastMCP, Logger } from 'fastmcp';
 
 class CustomLogger implements Logger {
   debug(...args: unknown[]): void {
-    console.log("[DEBUG]", new Date().toISOString(), ...args);
+    console.log('[DEBUG]', new Date().toISOString(), ...args);
   }
 
   error(...args: unknown[]): void {
-    console.error("[ERROR]", new Date().toISOString(), ...args);
+    console.error('[ERROR]', new Date().toISOString(), ...args);
   }
 
   info(...args: unknown[]): void {
-    console.info("[INFO]", new Date().toISOString(), ...args);
+    console.info('[INFO]', new Date().toISOString(), ...args);
   }
 
   log(...args: unknown[]): void {
-    console.log("[LOG]", new Date().toISOString(), ...args);
+    console.log('[LOG]', new Date().toISOString(), ...args);
   }
 
   warn(...args: unknown[]): void {
-    console.warn("[WARN]", new Date().toISOString(), ...args);
+    console.warn('[WARN]', new Date().toISOString(), ...args);
   }
 }
 
 const server = new FastMCP({
-  name: "My Server",
-  version: "1.0.0",
+  name: 'My Server',
+  version: '1.0.0',
   logger: new CustomLogger(),
 });
 ```
@@ -515,21 +515,21 @@ Tools can log messages to the client using the `log` object in the context objec
 
 ```js
 server.addTool({
-  name: "download",
-  description: "Download a file",
+  name: 'download',
+  description: 'Download a file',
   parameters: z.object({
     url: z.string(),
   }),
   execute: async (args, { log }) => {
-    log.info("Downloading file...", {
+    log.info('Downloading file...', {
       url,
     });
 
     // ...
 
-    log.info("Downloaded file");
+    log.info('Downloaded file');
 
-    return "done";
+    return 'done';
   },
 });
 ```
@@ -546,20 +546,20 @@ The `log` object has the following methods:
 The errors that are meant to be shown to the user should be thrown as `UserError` instances:
 
 ```js
-import { UserError } from "fastmcp";
+import { UserError } from 'fastmcp';
 
 server.addTool({
-  name: "download",
-  description: "Download a file",
+  name: 'download',
+  description: 'Download a file',
   parameters: z.object({
     url: z.string(),
   }),
   execute: async (args) => {
-    if (args.url.startsWith("https://example.com")) {
-      throw new UserError("This URL is not allowed");
+    if (args.url.startsWith('https://example.com')) {
+      throw new UserError('This URL is not allowed');
     }
 
-    return "done";
+    return 'done';
   },
 });
 ```
@@ -570,8 +570,8 @@ Tools can report progress by calling `reportProgress` in the context object:
 
 ```js
 server.addTool({
-  name: "download",
-  description: "Download a file",
+  name: 'download',
+  description: 'Download a file',
   parameters: z.object({
     url: z.string(),
   }),
@@ -588,7 +588,7 @@ server.addTool({
       total: 100,
     });
 
-    return "done";
+    return 'done';
   },
 });
 ```
@@ -678,13 +678,13 @@ As of the MCP Specification (2025-03-26), tools can include annotations that pro
 
 ```typescript
 server.addTool({
-  name: "fetch-content",
-  description: "Fetch content from a URL",
+  name: 'fetch-content',
+  description: 'Fetch content from a URL',
   parameters: z.object({
     url: z.string(),
   }),
   annotations: {
-    title: "Web Content Fetcher", // Human-readable title for UI display
+    title: 'Web Content Fetcher', // Human-readable title for UI display
     readOnlyHint: true, // Tool doesn't modify its environment
     openWorldHint: true, // Tool interacts with external entities
   },
@@ -719,9 +719,9 @@ Each resource is identified by a unique URI and can contain either text or binar
 
 ```ts
 server.addResource({
-  uri: "file:///logs/app.log",
-  name: "Application Logs",
-  mimeType: "text/plain",
+  uri: 'file:///logs/app.log',
+  name: 'Application Logs',
+  mimeType: 'text/plain',
   async load() {
     return {
       text: await readLogFile(),
@@ -763,13 +763,13 @@ You can also define resource templates:
 
 ```ts
 server.addResourceTemplate({
-  uriTemplate: "file:///logs/{name}.log",
-  name: "Application Logs",
-  mimeType: "text/plain",
+  uriTemplate: 'file:///logs/{name}.log',
+  name: 'Application Logs',
+  mimeType: 'text/plain',
   arguments: [
     {
-      name: "name",
-      description: "Name of the log",
+      name: 'name',
+      description: 'Name of the log',
       required: true,
     },
   ],
@@ -787,18 +787,18 @@ Provide `complete` functions for resource template arguments to enable automatic
 
 ```ts
 server.addResourceTemplate({
-  uriTemplate: "file:///logs/{name}.log",
-  name: "Application Logs",
-  mimeType: "text/plain",
+  uriTemplate: 'file:///logs/{name}.log',
+  name: 'Application Logs',
+  mimeType: 'text/plain',
   arguments: [
     {
-      name: "name",
-      description: "Name of the log",
+      name: 'name',
+      description: 'Name of the log',
       required: true,
       complete: async (value) => {
-        if (value === "Example") {
+        if (value === 'Example') {
           return {
-            values: ["Example Log"],
+            values: ['Example Log'],
           };
         }
 
@@ -824,8 +824,8 @@ FastMCP provides a convenient `embedded()` method that simplifies including reso
 
 ```js
 server.addTool({
-  name: "get_user_data",
-  description: "Retrieve user information",
+  name: 'get_user_data',
+  description: 'Retrieve user information',
   parameters: z.object({
     userId: z.string(),
   }),
@@ -833,7 +833,7 @@ server.addTool({
     return {
       content: [
         {
-          type: "resource",
+          type: 'resource',
           resource: await server.embedded(`user://profile/${args.userId}`),
         },
       ],
@@ -849,38 +849,38 @@ The `embedded()` method works seamlessly with resource templates:
 ```js
 // Define a resource template
 server.addResourceTemplate({
-  uriTemplate: "docs://project/{section}",
-  name: "Project Documentation",
-  mimeType: "text/markdown",
+  uriTemplate: 'docs://project/{section}',
+  name: 'Project Documentation',
+  mimeType: 'text/markdown',
   arguments: [
     {
-      name: "section",
+      name: 'section',
       required: true,
     },
   ],
   async load(args) {
     const docs = {
-      "getting-started": "# Getting Started\n\nWelcome to our project!",
-      "api-reference": "# API Reference\n\nAuthentication is required.",
+      'getting-started': '# Getting Started\n\nWelcome to our project!',
+      'api-reference': '# API Reference\n\nAuthentication is required.',
     };
     return {
-      text: docs[args.section] || "Documentation not found",
+      text: docs[args.section] || 'Documentation not found',
     };
   },
 });
 
 // Use embedded resources in a tool
 server.addTool({
-  name: "get_documentation",
-  description: "Retrieve project documentation",
+  name: 'get_documentation',
+  description: 'Retrieve project documentation',
   parameters: z.object({
-    section: z.enum(["getting-started", "api-reference"]),
+    section: z.enum(['getting-started', 'api-reference']),
   }),
   execute: async (args) => {
     return {
       content: [
         {
-          type: "resource",
+          type: 'resource',
           resource: await server.embedded(`docs://project/${args.section}`),
         },
       ],
@@ -896,27 +896,27 @@ It also works with directly defined resources:
 ```js
 // Define a direct resource
 server.addResource({
-  uri: "system://status",
-  name: "System Status",
-  mimeType: "text/plain",
+  uri: 'system://status',
+  name: 'System Status',
+  mimeType: 'text/plain',
   async load() {
     return {
-      text: "System operational",
+      text: 'System operational',
     };
   },
 });
 
 // Use in a tool
 server.addTool({
-  name: "get_system_status",
-  description: "Get current system status",
+  name: 'get_system_status',
+  description: 'Get current system status',
   parameters: z.object({}),
   execute: async () => {
     return {
       content: [
         {
-          type: "resource",
-          resource: await server.embedded("system://status"),
+          type: 'resource',
+          resource: await server.embedded('system://status'),
         },
       ],
     };
@@ -930,12 +930,12 @@ server.addTool({
 
 ```ts
 server.addPrompt({
-  name: "git-commit",
-  description: "Generate a Git commit message",
+  name: 'git-commit',
+  description: 'Generate a Git commit message',
   arguments: [
     {
-      name: "changes",
-      description: "Git diff or description of changes",
+      name: 'changes',
+      description: 'Git diff or description of changes',
       required: true,
     },
   ],
@@ -951,20 +951,20 @@ Prompts can provide auto-completion for their arguments:
 
 ```js
 server.addPrompt({
-  name: "countryPoem",
-  description: "Writes a poem about a country",
+  name: 'countryPoem',
+  description: 'Writes a poem about a country',
   load: async ({ name }) => {
     return `Hello, ${name}!`;
   },
   arguments: [
     {
-      name: "name",
-      description: "Name of the country",
+      name: 'name',
+      description: 'Name of the country',
       required: true,
       complete: async (value) => {
-        if (value === "Germ") {
+        if (value === 'Germ') {
           return {
-            values: ["Germany"],
+            values: ['Germany'],
           };
         }
 
@@ -983,17 +983,17 @@ If you provide an `enum` array for an argument, the server will automatically pr
 
 ```js
 server.addPrompt({
-  name: "countryPoem",
-  description: "Writes a poem about a country",
+  name: 'countryPoem',
+  description: 'Writes a poem about a country',
   load: async ({ name }) => {
     return `Hello, ${name}!`;
   },
   arguments: [
     {
-      name: "name",
-      description: "Name of the country",
+      name: 'name',
+      description: 'Name of the country',
       required: true,
-      enum: ["Germany", "France", "Italy"],
+      enum: ['Germany', 'France', 'Italy'],
     },
   ],
 });
@@ -1012,15 +1012,15 @@ If authentication fails, the function should throw a `Response` object, which wi
 
 ```ts
 const server = new FastMCP({
-  name: "My Server",
-  version: "1.0.0",
+  name: 'My Server',
+  version: '1.0.0',
   authenticate: (request) => {
-    const apiKey = request.headers["x-api-key"];
+    const apiKey = request.headers['x-api-key'];
 
-    if (apiKey !== "123") {
+    if (apiKey !== '123') {
       throw new Response(null, {
         status: 401,
-        statusText: "Unauthorized",
+        statusText: 'Unauthorized',
       });
     }
 
@@ -1036,7 +1036,7 @@ Now you can access the authenticated session data in your tools:
 
 ```ts
 server.addTool({
-  name: "sayHello",
+  name: 'sayHello',
   execute: async (args, { session }) => {
     return `Hello, ${session.id}!`;
   },
@@ -1052,30 +1052,30 @@ If `canAccess` is not provided, the tool is accessible to all authenticated user
 **Example:**
 
 ```typescript
-const server = new FastMCP<{ role: "admin" | "user" }>({
+const server = new FastMCP<{ role: 'admin' | 'user' }>({
   authenticate: async (request) => {
-    const role = request.headers["x-role"] as string;
-    return { role: role === "admin" ? "admin" : "user" };
+    const role = request.headers['x-role'] as string;
+    return { role: role === 'admin' ? 'admin' : 'user' };
   },
-  name: "My Server",
-  version: "1.0.0",
+  name: 'My Server',
+  version: '1.0.0',
 });
 
 server.addTool({
-  name: "admin-dashboard",
-  description: "An admin-only tool",
+  name: 'admin-dashboard',
+  description: 'An admin-only tool',
   // Only users with the 'admin' role can see and execute this tool
-  canAccess: (auth) => auth?.role === "admin",
+  canAccess: (auth) => auth?.role === 'admin',
   execute: async () => {
-    return "Welcome to the admin dashboard!";
+    return 'Welcome to the admin dashboard!';
   },
 });
 
 server.addTool({
-  name: "public-info",
-  description: "A tool available to everyone",
+  name: 'public-info',
+  description: 'A tool available to everyone',
   execute: async () => {
-    return "This is public information.";
+    return 'This is public information.';
   },
 });
 ```
@@ -1087,34 +1087,34 @@ In this example, only clients authenticating with the `admin` role will be able 
 FastMCP includes built-in support for OAuth discovery endpoints, supporting both **MCP Specification 2025-03-26** and **MCP Specification 2025-06-18** for OAuth integration. This makes it easy to integrate with OAuth authorization flows by providing standard discovery endpoints that comply with RFC 8414 (OAuth 2.0 Authorization Server Metadata) and RFC 9470 (OAuth 2.0 Protected Resource Metadata):
 
 ```ts
-import { FastMCP } from "fastmcp";
-import { buildGetJwks } from "get-jwks";
-import fastJwt from "fast-jwt";
+import { FastMCP } from 'fastmcp';
+import { buildGetJwks } from 'get-jwks';
+import fastJwt from 'fast-jwt';
 
 const server = new FastMCP({
-  name: "My Server",
-  version: "1.0.0",
+  name: 'My Server',
+  version: '1.0.0',
   oauth: {
     enabled: true,
     authorizationServer: {
-      issuer: "https://auth.example.com",
-      authorizationEndpoint: "https://auth.example.com/oauth/authorize",
-      tokenEndpoint: "https://auth.example.com/oauth/token",
-      jwksUri: "https://auth.example.com/.well-known/jwks.json",
-      responseTypesSupported: ["code"],
+      issuer: 'https://auth.example.com',
+      authorizationEndpoint: 'https://auth.example.com/oauth/authorize',
+      tokenEndpoint: 'https://auth.example.com/oauth/token',
+      jwksUri: 'https://auth.example.com/.well-known/jwks.json',
+      responseTypesSupported: ['code'],
     },
     protectedResource: {
-      resource: "mcp://my-server",
-      authorizationServers: ["https://auth.example.com"],
+      resource: 'mcp://my-server',
+      authorizationServers: ['https://auth.example.com'],
     },
   },
   authenticate: async (request) => {
     const authHeader = request.headers.authorization;
 
-    if (!authHeader?.startsWith("Bearer ")) {
+    if (!authHeader?.startsWith('Bearer ')) {
       throw new Response(null, {
         status: 401,
-        statusText: "Missing or invalid authorization header",
+        statusText: 'Missing or invalid authorization header',
       });
     }
 
@@ -1125,13 +1125,13 @@ const server = new FastMCP({
       // TODO: Cache the discovery document to avoid repeated requests
       // Discover OAuth/OpenID configuration from well-known endpoint
       const discoveryUrl =
-        "https://auth.example.com/.well-known/openid-configuration";
+        'https://auth.example.com/.well-known/openid-configuration';
       // Alternative: Use OAuth authorization server metadata endpoint
       // const discoveryUrl = 'https://auth.example.com/.well-known/oauth-authorization-server';
 
       const discoveryResponse = await fetch(discoveryUrl);
       if (!discoveryResponse.ok) {
-        throw new Error("Failed to fetch OAuth discovery document");
+        throw new Error('Failed to fetch OAuth discovery document');
       }
 
       const config = await discoveryResponse.json();
@@ -1155,9 +1155,9 @@ const server = new FastMCP({
           });
           return jwk;
         },
-        algorithms: ["RS256", "ES256"],
+        algorithms: ['RS256', 'ES256'],
         issuer: issuer,
-        audience: "mcp://my-server",
+        audience: 'mcp://my-server',
       });
 
       // Verify the JWT token
@@ -1172,7 +1172,7 @@ const server = new FastMCP({
     } catch (error) {
       throw new Response(null, {
         status: 401,
-        statusText: "Invalid OAuth token",
+        statusText: 'Invalid OAuth token',
       });
     }
   },
@@ -1191,8 +1191,8 @@ For JWT token validation, you can use libraries like [`get-jwks`](https://github
 If you are exposing your MCP server via HTTP, you may wish to allow clients to supply sensitive keys via headers, which can then be passed along to APIs that your tools interact with, allowing each client to supply their own API keys. This can be done by capturing the HTTP headers in the `authenticate` section and storing them in the session to be referenced by the tools later.
 
 ```ts
-import { FastMCP } from "fastmcp";
-import { IncomingHttpHeaders } from "http";
+import { FastMCP } from 'fastmcp';
+import { IncomingHttpHeaders } from 'http';
 
 // Define the session data type
 interface SessionData {
@@ -1202,8 +1202,8 @@ interface SessionData {
 
 // Create a server instance
 const server = new FastMCP({
-  name: "My Server",
-  version: "1.0.0",
+  name: 'My Server',
+  version: '1.0.0',
   authenticate: async (request: any): Promise<SessionData> => {
     // Authentication logic
     return {
@@ -1214,24 +1214,24 @@ const server = new FastMCP({
 
 // Tool to display HTTP headers
 server.addTool({
-  name: "headerTool",
-  description: "Reads HTTP headers from the request",
+  name: 'headerTool',
+  description: 'Reads HTTP headers from the request',
   execute: async (args: any, context: any) => {
     const session = context.session as SessionData;
     const headers = session?.headers ?? {};
 
     const getHeaderString = (header: string | string[] | undefined) =>
-      Array.isArray(header) ? header.join(", ") : (header ?? "N/A");
+      Array.isArray(header) ? header.join(', ') : (header ?? 'N/A');
 
-    const userAgent = getHeaderString(headers["user-agent"]);
-    const authorization = getHeaderString(headers["authorization"]);
+    const userAgent = getHeaderString(headers['user-agent']);
+    const authorization = getHeaderString(headers['authorization']);
     return `User-Agent: ${userAgent}\nAuthorization: ${authorization}\nAll Headers: ${JSON.stringify(headers, null, 2)}`;
   },
 });
 
 // Start the server
 server.start({
-  transportType: "httpStream",
+  transportType: 'httpStream',
   httpStream: {
     port: 8080,
   },
@@ -1241,23 +1241,23 @@ server.start({
 A client that would connect to this may look something like this:
 
 ```ts
-import { StreamableHTTPClientTransport } from "@modelcontextprotocol/sdk/client/streamableHttp.js";
-import { Client } from "@modelcontextprotocol/sdk/client/index.js";
+import { StreamableHTTPClientTransport } from '@modelcontextprotocol/sdk/client/streamableHttp.js';
+import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 
 const transport = new StreamableHTTPClientTransport(
   new URL(`http://localhost:8080/mcp`),
   {
     requestInit: {
       headers: {
-        Authorization: "Test 123",
+        Authorization: 'Test 123',
       },
     },
-  },
+  }
 );
 
 const client = new Client({
-  name: "example-client",
-  version: "1.0.0",
+  name: 'example-client',
+  version: '1.0.0',
 });
 
 (async () => {
@@ -1265,13 +1265,13 @@ const client = new Client({
 
   // Call a tool
   const result = await client.callTool({
-    name: "headerTool",
+    name: 'headerTool',
     arguments: {
-      arg1: "value",
+      arg1: 'value',
     },
   });
 
-  console.log("Tool result:", result);
+  console.log('Tool result:', result);
 })().catch(console.error);
 ```
 
@@ -1307,8 +1307,8 @@ You can provide instructions to the server using the `instructions` option:
 
 ```ts
 const server = new FastMCP({
-  name: "My Server",
-  version: "1.0.0",
+  name: 'My Server',
+  version: '1.0.0',
   instructions:
     'Instructions describing how to use the server and its features.\n\nThis can be used by clients to improve the LLM\'s understanding of available tools, resources, etc. It can be thought of like a "hint" to the model. For example, this information MAY be added to the system prompt.',
 });
@@ -1329,11 +1329,11 @@ We allocate a new server instance for each client connection to enable 1:1 commu
 You can listen to events emitted by the server using the `on` method:
 
 ```ts
-server.on("connect", (event) => {
-  console.log("Client connected:", event.session);
+server.on('connect', (event) => {
+  console.log('Client connected:', event.session);
 });
 
-server.on("disconnect", (event) => {
-  console.log("Client disconnected:", event.session);
+server.on('disconnect', (event) => {
+  console.log('Client disconnected:', event.session);
 });
 ```

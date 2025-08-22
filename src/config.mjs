@@ -8,19 +8,19 @@ import path from 'path';
  */
 export function getTaskConfigPath() {
   const configPath = process.env.TASK_CONFIG_PATH;
-  
+
   if (!configPath) {
     throw new Error(
       'TASK_CONFIG_PATH environment variable is required. Please set it to the full path of your task configuration file.'
     );
   }
-  
+
   if (!path.isAbsolute(configPath)) {
     throw new Error(
       `TASK_CONFIG_PATH must be an absolute path. Got: ${configPath}`
     );
   }
-  
+
   return configPath;
 }
 
@@ -44,24 +44,26 @@ export function validateConfigFile(configPath) {
  */
 export function loadTaskConfig() {
   const configPath = getTaskConfigPath();
-  
+
   if (!validateConfigFile(configPath)) {
     throw new Error(`Task configuration file does not exist: ${configPath}`);
   }
-  
+
   try {
     const configContent = fs.readFileSync(configPath, 'utf8');
     const config = JSON.parse(configContent);
-    
+
     // 基础结构验证
     if (!config.tasks || !Array.isArray(config.tasks)) {
       throw new Error('Configuration file must contain a "tasks" array');
     }
-    
+
     return config;
   } catch (error) {
     if (error instanceof SyntaxError) {
-      throw new Error(`Invalid JSON format in configuration file: ${configPath}`);
+      throw new Error(
+        `Invalid JSON format in configuration file: ${configPath}`
+      );
     }
     throw error;
   }
@@ -74,7 +76,7 @@ export function loadTaskConfig() {
  */
 export function saveTaskConfig(config) {
   const configPath = getTaskConfigPath();
-  
+
   try {
     const configContent = JSON.stringify(config, null, 2);
     fs.writeFileSync(configPath, configContent, 'utf8');
@@ -90,13 +92,13 @@ export function saveTaskConfig(config) {
 export function getConfigInfo() {
   const configPath = getTaskConfigPath();
   const config = loadTaskConfig();
-  
+
   return {
     configPath,
     config,
     meta: config.meta || {},
     tasks: config.tasks || [],
-    tasksCount: config.tasks ? config.tasks.length : 0
+    tasksCount: config.tasks ? config.tasks.length : 0,
   };
 }
 
@@ -105,5 +107,5 @@ export default {
   validateConfigFile,
   loadTaskConfig,
   saveTaskConfig,
-  getConfigInfo
+  getConfigInfo,
 };

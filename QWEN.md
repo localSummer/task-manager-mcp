@@ -14,24 +14,24 @@ The server is built using the `fastmcp` framework and communicates via stdio, ma
 
 ## Key Technologies
 
-*   **Language**: JavaScript (ES Modules)
-*   **Runtime**: Node.js (version 16 or higher)
-*   **Framework**: `fastmcp`
-*   **Validation**: `zod`
-*   **Configuration**: External JSON files
+- **Language**: JavaScript (ES Modules)
+- **Runtime**: Node.js (version 16 or higher)
+- **Framework**: `fastmcp`
+- **Validation**: `zod`
+- **Configuration**: External JSON files
 
 ## Project Structure
 
-*   `src/`: Contains the main source code.
-    *   `index.mjs`: The entry point for the application.
-    *   `server.mjs`: Initializes and configures the `FastMCP` server.
-    *   `config.mjs`: Handles loading, validating, and saving the task configuration file.
-    *   `constant.mjs`: Defines constants used throughout the application (e.g., valid task statuses).
-    *   `services/`: Contains the core business logic for task operations (e.g., setting status, finding next task).
-    *   `tools/`: Defines and registers the MCP tools (`set_task_status`, `next_task`) that the server exposes to clients.
-*   `package.json`: Defines project metadata, dependencies, and NPM scripts.
-*   `example-tasks.json`: An example of the task configuration file format.
-*   `README.md`: Provides detailed documentation on features, installation, configuration, and usage.
+- `src/`: Contains the main source code.
+  - `index.mjs`: The entry point for the application.
+  - `server.mjs`: Initializes and configures the `FastMCP` server.
+  - `config.mjs`: Handles loading, validating, and saving the task configuration file.
+  - `constant.mjs`: Defines constants used throughout the application (e.g., valid task statuses).
+  - `services/`: Contains the core business logic for task operations (e.g., setting status, finding next task).
+  - `tools/`: Defines and registers the MCP tools (`set_task_status`, `next_task`) that the server exposes to clients.
+- `package.json`: Defines project metadata, dependencies, and NPM scripts.
+- `example-tasks.json`: An example of the task configuration file format.
+- `README.md`: Provides detailed documentation on features, installation, configuration, and usage.
 
 ## Building and Running
 
@@ -43,16 +43,16 @@ This project is designed to run directly with Node.js. Ensure you have Node.js >
     export TASK_CONFIG_PATH="/absolute/path/to/your/tasks.json"
     ```
 3.  **Run the Server**:
-    *   **Direct Execution**: `node src/index.mjs`
-    *   **Using NPM Script**: `npm start`
-    *   **Development Mode (with fastmcp dev)**: `npm run dev`
-    *   **With MCP Inspector**: `npm run inspector`
+    - **Direct Execution**: `node src/index.mjs`
+    - **Using NPM Script**: `npm start`
+    - **Development Mode (with fastmcp dev)**: `npm run dev`
+    - **With MCP Inspector**: `npm run inspector`
 
 ## Development Conventions
 
-*   **Modules**: Uses ES Modules (`.mjs` extension).
-*   **Entry Point**: The main entry point is `src/index.mjs`.
-*   **Configuration**: Relies on an external JSON file specified by the `TASK_CONFIG_PATH` environment variable. The structure of this file is defined in `example-tasks.json`.
-*   **MCP Tools**: Tools are defined in `src/tools/` and registered with the server in `src/tools/index.mjs`. Each tool has a `register` function and uses a corresponding `service` function from `src/services/`.
-*   **Error Handling**: The server handles errors gracefully, often exiting silently to comply with the MCP protocol.
-*   **Logging**: Context-aware logging is available within tool execution functions.
+- **Modules**: Uses ES Modules (`.mjs` extension).
+- **Entry Point**: The main entry point is `src/index.mjs`.
+- **Configuration**: Relies on an external JSON file specified by the `TASK_CONFIG_PATH` environment variable. The structure of this file is defined in `example-tasks.json`.
+- **MCP Tools**: Tools are defined in `src/tools/` and registered with the server in `src/tools/index.mjs`. Each tool has a `register` function and uses a corresponding `service` function from `src/services/`.
+- **Error Handling**: The server handles errors gracefully, often exiting silently to comply with the MCP protocol.
+- **Logging**: Context-aware logging is available within tool execution functions.

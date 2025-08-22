@@ -10,7 +10,9 @@
   "scripts": {
     "start": "node src/index.mjs",
     "dev": "fastmcp dev src/index.mjs",
-    "inspector": "npx @modelcontextprotocol/inspector src/index.mjs"
+    "inspector": "npx @modelcontextprotocol/inspector src/index.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "keywords": [
     "mcp",
@@ -27,5 +29,8 @@
   },
   "engines": {
     "node": ">=16"
+  },
+  "devDependencies": {
+    "prettier": "3.6.2"
   }
 }

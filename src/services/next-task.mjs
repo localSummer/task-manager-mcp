@@ -163,7 +163,7 @@ const findNextTask = (tasks) => {
 export const getNextTaskService = async () => {
   try {
     const taskConfig = loadTaskConfig();
-    
+
     if (!taskConfig || !taskConfig.tasks) {
       return {
         status: 'error',

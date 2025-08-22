@@ -44,6 +44,7 @@ This is a Model Context Protocol (MCP) server built with the FastMCP framework f
 ### Task Configuration Structure
 
 Tasks are defined in JSON with this hierarchy:
+
 - `meta`: Project metadata
 - `tasks[]`: Top-level tasks with status, preconditions, priority
 - `subtasks[]`: Nested tasks within parent tasks
@@ -56,7 +57,7 @@ Tasks are defined in JSON with this hierarchy:
 ### File Organization
 
 - Entry point: `src/index.mjs` (executable with shebang)
-- Server class: `src/server.mjs` (FastMCP server wrapper with lifecycle management)  
+- Server class: `src/server.mjs` (FastMCP server wrapper with lifecycle management)
 - Tools registration: `src/tools/index.mjs` aggregates all tool definitions
 - Each tool has both definition (`src/tools/`) and implementation (`src/services/`)
 - Configuration management: `src/config.mjs` handles JSON file operations and validation
@@ -65,8 +66,9 @@ Tasks are defined in JSON with this hierarchy:
 ### Task Status Values
 
 Valid status values for both tasks and subtasks:
+
 - `pending`: Initial state, ready to be started
-- `done`: Completed successfully  
+- `done`: Completed successfully
 - `in-progress`: Currently being worked on
 - `review`: Completed but needs review
 - `deferred`: Postponed to later
