@@ -58,6 +58,7 @@ Tasks are defined in JSON with this hierarchy:
 
 - `set_task_status`: Update task/subtask status (supports comma-separated identifiers)
 - `next_task`: Find the next executable task based on dependencies and priority
+- `initialize_tasks`: Reset all tasks and subtasks to pending status with empty results
 
 ### Available MCP Prompts
 
@@ -99,4 +100,23 @@ Valid status values for both tasks and subtasks:
 
 - **description**: Brief description of task/subtask
 - **details**: Detailed explanation or file path for requirements (supports path format)
+- **result**: Expected outcome or actual result of task/subtask execution (string, optional)
 - **tasksResultOutputDir**: Directory path for storing task result files (configurable in meta section)
+
+### Tool Implementation Pattern
+
+When adding new tools, follow this consistent pattern:
+
+1. **Service Layer** (`src/services/<tool-name>.mjs`): 
+   - Contains core business logic
+   - Handles task configuration loading/saving via `config.mjs`
+   - Returns standardized response objects with `status` and `data`/`error` fields
+   - Uses descriptive logging for operations
+
+2. **Tool Layer** (`src/tools/<tool-name>.mjs`):
+   - Defines MCP tool registration with Zod schema validation
+   - Calls corresponding service function
+   - Uses `handleApiResult()` from `tools/utils.mjs` for consistent response formatting
+
+3. **Registration** (`src/tools/index.mjs`):
+   - Import and register the new tool in `registerAllTools()`

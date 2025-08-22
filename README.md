@@ -113,6 +113,17 @@ Find the next executable task based on priorities and preconditions.
 
 Returns the highest priority task that has all dependencies satisfied.
 
+### initialize_tasks
+
+Initialize project by resetting all tasks and subtasks status to "pending" and result to empty string.
+
+This tool will:
+- Reset all task and subtask `status` fields to `"pending"`
+- Reset all task and subtask `result` fields to empty string `""`
+- Save the updated configuration automatically
+
+No parameters required.
+
 ## Available MCP Prompts
 
 ### get-task-rules

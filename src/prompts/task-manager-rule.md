@@ -205,7 +205,7 @@
 ```
 请选择下一步操作：
 - 输入 execute 开始执行当前获取到的顶级父任务及其所有子任务（自动化连续执行）
-- 输入 reset 则调用 `task-manager-mcp` 中的 `initialize_project` tool 初始化并重置项目
+- 输入 reset 则调用 `task-manager-mcp` 中的 `initialize_tasks` tool 初始化任务列表
 ```
 
 **当前没有待执行顶级父任务时：**
@@ -213,7 +213,7 @@
 ```
 请选择下一步操作：
 - 输入 next 则调用 `task-manager-mcp` 中的 `next_task` tool 获取下一个待执行的顶级父任务
-- 输入 reset 则调用 `task-manager-mcp` 中的 `initialize_project` tool 初始化并重置项目
+- 输入 reset 则调用 `task-manager-mcp` 中的 `initialize_tasks` tool 初始化任务列表
 ```
 
 ### 6.4. 命令处理逻辑
@@ -242,7 +242,7 @@ if (用户输入 == "execute") {
     提供 reset 选项;
   }
 } else if (用户输入 == "reset") {
-  调用 initialize_project tool 重置项目;
+  调用 initialize_tasks tool 初始化任务列表;
   提示: "项目已重置";
   提供 next 和 reset 选项;
 }
