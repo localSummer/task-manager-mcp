@@ -1,5 +1,7 @@
 # task-manager-mcp
 
+[中文版 README](./README-zh.md) | [English README](./README.md)
+
 一个轻量级的 MCP（模型上下文协议）服务器，用于任务管理，具有智能状态跟踪和基于前置条件的下一任务发现功能。
 
 ## 功能特性

@@ -1,5 +1,7 @@
 # task-manager-mcp
 
+[中文版 README](./README-zh.md) | [English README](./README.md)
+
 A lightweight MCP (Model Context Protocol) server for task management with intelligent status tracking and next task discovery based on preconditions.
 
 ## Features
