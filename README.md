@@ -10,6 +10,10 @@ A lightweight MCP (Model Context Protocol) server for task management with intel
 - **Flexible Configuration**: Configure via task JSON files with customizable structure
 - **Standalone**: No external dependencies, ready for independent deployment
 
+## Quick Start
+
+⚠️ **Important**: `/task-manager-mcp:get-task-rules` (MCP) is the main entry point for the entire MCP system to function properly. Start with this prompt to get comprehensive guidance for all task management operations.
+
 ## Installation
 
 ```bash
@@ -45,18 +49,19 @@ Your task configuration file should follow this structure:
   "meta": {
     "projectName": "My Project", // Project name (string)
     "description": "Project task management", // Project description (string)
-    "version": "1.0.0" // Configuration version (string)
+    "version": "1.0.0", // Configuration version (string)
+    "tasksResultOutputDir": "src/task-results" // Directory path for storing task result files (string, optional)
   },
   "tasks": [
     {
       "number": 1, // Task number (float, e.g., 1, 1.1, 2.5) - Unique identifier for the task
       "key": "setup-project", // Task key (string) - Unique identifier for the task
       "title": "Project Setup", // Task title (string)
-      "description": "Initialize project structure", // Task description (string)
+      "description": "Initialize project structure", // Task description (string) - Brief description of the task
       "status": "pending", // Task status (string) - Must be one of: pending, done, in-progress, review, deferred, cancelled
       "precondition": [], // Array of task keys or numbers that must be completed before this task can be executed (array of strings/numbers)
       "priority": "high", // Task priority (string) - Must be one of: low, medium, high
-      "details": "", // Additional task details (string, optional)
+      "details": "", // Additional task details (string, optional) - Detailed explanation or file path for task requirements
       "result": "", // Expected result of the task (string, optional)
       "testStrategy": "", // Strategy for testing this task (string, optional)
       "subtasks": [
@@ -65,8 +70,8 @@ Your task configuration file should follow this structure:
           "number": 1.1, // Subtask number (float) - Unique identifier for the subtask
           "key": "create-folders", // Subtask key (string) - Unique identifier for the subtask
           "title": "Create Folder Structure", // Subtask title (string)
-          "description": "Set up the basic directory structure", // Subtask description (string)
-          "details": "", // Additional subtask details (string, optional)
+          "description": "Set up the basic directory structure", // Subtask description (string) - Brief description of the subtask
+          "details": "", // Additional subtask details (string, optional) - Detailed explanation or file path for subtask requirements
           "status": "pending", // Subtask status (string) - Must be one of: pending, done, in-progress, review, deferred, cancelled
           "precondition": [], // Array of task/subtask keys or numbers that must be completed before this subtask can be executed (array of strings/numbers)
           "priority": "high", // Subtask priority (string) - Must be one of: low, medium, high
@@ -84,6 +89,11 @@ Your task configuration file should follow this structure:
 - **status**: `pending`, `done`, `in-progress`, `review`, `deferred`, `cancelled`
 - **priority**: `low`, `medium`, `high`
 
+### Field Descriptions
+
+- **description**: Brief description of the task or subtask
+- **details**: Detailed explanation or file path for task/subtask requirements (supports path format for referencing external documents)
+
 ## Available Tools
 
 ### set_task_status
@@ -100,6 +110,18 @@ Parameters:
 Find the next executable task based on priorities and preconditions.
 
 Returns the highest priority task that has all dependencies satisfied.
+
+## Available MCP Prompts
+
+### get-task-rules
+
+Retrieves complete task management system rules and guidelines with dynamic configuration replacement.
+
+This prompt provides comprehensive documentation for task management operations, automatically replacing configuration placeholders with values from your task configuration file.
+
+**Usage**: Use `/task-manager-mcp:get-task-rules` (MCP) and follow the provided instructions to execute task management operations.
+
+⚠️ **Important**: `/task-manager-mcp:get-task-rules` (MCP) is the main entry point for the entire MCP system to function properly. Start with this prompt to get comprehensive guidance for all task management operations.
 
 ## Related Projects
 

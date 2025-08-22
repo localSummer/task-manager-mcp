@@ -13,6 +13,10 @@ npm run dev
 
 # Debug with MCP inspector
 npm run inspector
+
+# Code formatting
+npm run format        # Format all files with Prettier
+npm run format:check  # Check formatting without making changes
 ```
 
 ## Environment Configuration
@@ -31,6 +35,7 @@ This is a Model Context Protocol (MCP) server built with the FastMCP framework f
 
 - **Server Layer** (`src/server.mjs`): FastMCP server initialization and lifecycle management
 - **Tools Layer** (`src/tools/`): MCP tool definitions that expose functionality to clients
+- **Prompts Layer** (`src/prompts/`): MCP prompt definitions for task management rules
 - **Services Layer** (`src/services/`): Business logic for task operations
 - **Configuration Layer** (`src/config.mjs`): Task file loading, validation, and persistence
 
@@ -54,11 +59,16 @@ Tasks are defined in JSON with this hierarchy:
 - `set_task_status`: Update task/subtask status (supports comma-separated identifiers)
 - `next_task`: Find the next executable task based on dependencies and priority
 
+### Available MCP Prompts
+
+- `get-task-rules`: Retrieves complete task management system rules and guidelines with dynamic configuration replacement
+
 ### File Organization
 
 - Entry point: `src/index.mjs` (executable with shebang)
 - Server class: `src/server.mjs` (FastMCP server wrapper with lifecycle management)
 - Tools registration: `src/tools/index.mjs` aggregates all tool definitions
+- Prompts registration: `src/prompts/index.mjs` aggregates all prompt definitions
 - Each tool has both definition (`src/tools/`) and implementation (`src/services/`)
 - Configuration management: `src/config.mjs` handles JSON file operations and validation
 - Shared utilities in respective `utils.mjs` files
@@ -82,3 +92,11 @@ Valid status values for both tasks and subtasks:
 - Task identifiers support both key strings and numeric IDs
 - Graceful shutdown handlers for SIGINT/SIGTERM in index.mjs
 - Node.js minimum version: 16 (specified in package.json)
+- Prettier is configured for code formatting with devDependencies
+- Prompts support dynamic placeholder replacement from configuration files
+
+### Key Configuration Fields
+
+- **description**: Brief description of task/subtask
+- **details**: Detailed explanation or file path for requirements (supports path format)
+- **tasksResultOutputDir**: Directory path for storing task result files (configurable in meta section)
